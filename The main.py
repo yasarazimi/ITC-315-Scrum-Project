@@ -154,4 +154,49 @@ while tries_flag != "Close the program" :
 								
 								else :
 											print("Please enter a correct choice\n")
+										elif AdminOptions == "2" :															#Admin mode --> Doctors Management
+							print("-----------------------------------------")
+							print("|To add new doctor Enter 1              |")
+							print("|To display doctor Enter 2              |")
+							print("|To delete doctor data Enter 3          |")
+							print("|To edit doctor data Enter 4            |")
+							print("|To be back enter B                     |")
+							print("-----------------------------------------")
+							Admin_choice = input ("Enter your choice : ")
+							Admin_choice = Admin_choice.upper()
+							
+							if Admin_choice == "1" : 											#Admin mode --> Doctors Management --> Enter new doctor data
+									try :		#To avoid non integer input
+										Doctor_ID = int(input("Enter doctor ID : "))
+										while Doctor_ID in Doctors_DataBase :			#if Admin entered used ID
+											Doctor_ID = int(input("This ID is unavailable, please try another ID : "))
+										
+										Department=input("Enter Doctor department : ")
+										Name      =input("Enter Doctor name       : ")
+										Address   =input("Enter Doctor address    : ")
+										Doctors_DataBase[Doctor_ID]=[[Department,Name,Address]]
+										print("----------------------Doctor added successfully----------------------")
+									except :
+										print("Doctor ID should be an integer number")
+								
+							elif Admin_choice == "2" : 											#Admin mode --> Doctors Management --> Display doctor data
+									try :		#To avoid non integer input
+										Doctor_ID = int(input("Enter doctor ID : "))
+										while Doctor_ID not in Doctors_DataBase :
+											Doctor_ID = int(input("Incorrect ID, Please Enter doctor ID : "))
+										print("Doctor name    : ",Doctors_DataBase[Doctor_ID][0][1])
+										print("Doctor address : ",Doctors_DataBase[Doctor_ID][0][2])
+										print("Doctor is in "+Doctors_DataBase[Doctor_ID][0][0]+" department")
+									except :
+										print("Doctor ID should be an integer number")
+							
+							elif Admin_choice == "3" :											#Admin mode --> Doctors Management --> Delete doctor data
+									try :		#To avoid non integer input
+										Doctor_ID = int(input("Enter doctor ID : "))
+										while Doctor_ID not in Doctors_DataBase :
+											Doctor_ID = int(input("Incorrect ID, Please Enter doctor ID : "))
+										Doctors_DataBase.pop(Doctor_ID)
+										print("/----------------------Doctor data deleted successfully----------------------/")
+									except :
+										print("Doctor ID should be an integer number")
 											
