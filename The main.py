@@ -321,4 +321,42 @@ while tries_flag != "Close the program" :
 												print("No Appointment for this patient")
 									except :
 										print("Doctor ID should be an integer number")
-											
+										elif Admin_choice == "3" :												#Admin mode --> Appointment Management --> Cancel an appointment
+									try :		#To avoid non integer input
+										patient_ID = int(input("Enter patient ID : "))
+										while patient_ID not in Pateints_DataBase :
+											patient_ID = int(input("Invorrect ID, Enter patient ID : "))
+										try :
+												AppointmentIndex,PairKey = AppointmentIndexInDoctorsDataBase(patient_ID)						
+												Doctors_DataBase[PairKey].pop(AppointmentIndex)
+												print("/----------------------appointment canceled successfully----------------------/")
+										except :
+												print("No Appointment for this patient")
+									except :	 #To avoid no return function
+										print("Patient ID should be an integer number")
+							
+							elif Admin_choice == "B" :												#Back
+										break
+							
+							else :
+										print("please enter a correct choice")
+						
+						elif AdminOptions == "B" :															#Back
+							break
+						
+						else :
+							print("Please enter a correct option")
+					
+				
+					elif Password != "1234" :
+						if tries < 2 :
+							Password = input("Password incorrect, please try again : ")
+							tries += 1
+						else :
+							print("Incorrect password, no more tries")
+							tries_flag = "Close the program"
+							break
+				
+					Write_Hospital_Excel_Sheet.Write_Patients_DataBase(Pateints_DataBase)
+					Write_Hospital_Excel_Sheet.Write_Doctors_DataBase(Doctors_DataBase)
+										
