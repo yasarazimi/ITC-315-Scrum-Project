@@ -359,4 +359,70 @@ while tries_flag != "Close the program" :
 				
 					Write_Hospital_Excel_Sheet.Write_Patients_DataBase(Pateints_DataBase)
 					Write_Hospital_Excel_Sheet.Write_Doctors_DataBase(Doctors_DataBase)
+					elif Admin_user_mode == "2" :																		#User mode
+			print("****************************************\n|         Welcome to user mode         |\n****************************************")
+			while True :
+				print("\n-----------------------------------------")
+				print("|To view hospital's departments Enter 1 |")
+				print("|To view hospital's docotrs Enter 2     |")
+				print("|To view patients' residents Enter 3    |")
+				print("|To view patient's details Enter 4      |")
+				print("|To view doctor's appointments Enter 5  |")
+				print("|To be Back Enter B                     |")
+				print("-----------------------------------------")
+				UserOptions = input("Enter your choice : ")
+				UserOptions = UserOptions.upper()
+				
+				if   UserOptions == "1" :											#User mode --> view hospital's departments
+							print("Hospital's departments :")
+							for i in Doctors_DataBase :
+								print("	"+Doctors_DataBase[i][0][0])
+					
+				elif UserOptions == "2" :											#User mode --> view hospital's Doctors
+							print("Hospital's doctors :")
+							for i in Doctors_DataBase :
+								print("	"+Doctors_DataBase[i][0][1]+" in "+Doctors_DataBase[i][0][0]+" department, from "+Doctors_DataBase[i][0][2])
+								
+				elif UserOptions == "3" :											#User mode --> view patients' residents
+					for i in Pateints_DataBase :
+						print("	Patient : "+Pateints_DataBase[i][2]+" in "+Pateints_DataBase[i][0]+" department and followed by "+Pateints_DataBase[i][1]+", age : "+Pateints_DataBase[i][3]+", from : "+Pateints_DataBase[i][5]+", RoomNumber : "+Pateints_DataBase[i][6])
+				
+				elif UserOptions == "4" :											#User mode --> view patient's details
+					try :				#To avoid non integer input
+						patient_ID = int(input("Enter patient's ID : "))
+						while patient_ID not in Pateints_DataBase :
+							patient_ID = int(input("Incorrect Id, Please enter patient ID : "))
+						print("	patient name        : ",Pateints_DataBase[patient_ID][2])
+						print("	patient age         : ",Pateints_DataBase[patient_ID][3])
+						print("	patient gender      : ",Pateints_DataBase[patient_ID][4])
+						print("	patient address     : ",Pateints_DataBase[patient_ID][5])
+						print("	patient room number : ",Pateints_DataBase[patient_ID][6])
+						print("	patient is in "+Pateints_DataBase[patient_ID][0]+" department")
+						print("	patient is followed by doctor : "+Pateints_DataBase[patient_ID][1])
+					except :
+						print("Patient ID should be an integer number")
+							
+				elif UserOptions == "5" :											#User mode --> view doctor's appointments
+					try :				#To avoid non integer input
+						Doctor_ID = int(input("Enter doctor's ID : "))
+						while Doctor_ID not in Doctors_DataBase :
+							Doctor_ID = int(input("Incorrect Id, Please enter doctor ID : "))
+						print(Doctors_DataBase[Doctor_ID][0][1]+" has appointments :")
+						for i in Doctors_DataBase[Doctor_ID] :
+							if type(i[0])==str :
+								continue
+							else :
+								print("	from : "+i[1]+"    to : "+i[2])
+					except :
+						print("Doctor ID should be an integer number")
+					
+				elif UserOptions == "B" :											#Back
+					break
+					
+				else :
+					print("Please Enter a correct choice")
+					
+					
+		else :
+			print("Please choice just 1 or 2")
 										
